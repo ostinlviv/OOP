@@ -1,0 +1,34 @@
+.title span {
+    display: inline-block;
+    font-weight: bold;
+    width: 150px;
+}
+.title {
+    margin-left: 40px;
+}
+li span {
+    display: inline-block;
+    width: 150px;
+}
+h3 {
+    margin-top: 50px;
+}
+
+.addEmployee {
+    margin: 20px;
+}
+input {
+    width: 130px;
+    margin-right: 10px;
+}
+select {
+    width: 130px;
+    margin-right: 10px;
+}
+th {
+    width: 130px;
+    padding-right: 10px;
+}
+tr {
+    text-align: center;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>People management</title>
+    <link rel="stylesheet" href="management.css">
+</head>
+<body>
+
+<h3>Add new user</h3>
+<form id="form">
+    <input type="text" id="name" size="40" placeholder="Name" />
+    <select  id="sex">
+        <option>Male</option>
+        <option>Female</option>
+    </select>
+    <input type="date" id="birth" size="40" placeholder="Birth date" />
+    <input type="text" id="address" size="40" placeholder="Address" />
+    <input type="tel" id="phone" size="40" placeholder="Phone" />
+    <input type="email" id="email" size="40" placeholder="E-mail" />
+    <select  id="visibility">
+        <option>User</option>
+        <option>SuperUser</option>
+    </select>
+</form>
+<button class="addUser">Add New user </button>
+<h3>List of users</h3>
+<div class="table">
+    <table id="users">
+        <tr>
+            <th>Name</th>
+            <th>Sex</th>
+            <th>Birth date</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>E-mail</th>
+        </tr>
+    </table>
+</div>
+<script src="management.js"></script>
+</body>
+</html>

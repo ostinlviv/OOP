@@ -1,0 +1,49 @@
+body {
+    background: url('bg.jpg') no-repeat fixed center;
+    background-size: cover;
+    font-family: 'Lobster', cursive;
+}
+main {
+    margin: 10px auto;
+    width: 500px;
+}
+img {
+    width: 100%;
+}
+#logo{
+    margin: 10px 50px;
+}
+#logo{
+    margin: 10px 20px;
+}
+#items {
+    display: flex;
+    justify-content: space-around;
+}
+h2 {
+    text-align: center;
+    font-size: 2.5em;
+    text-shadow: 0 0 1em white, 0 0 0.5em white, 0 0 1.5em white;
+    color: orange;
+}
+li {
+    text-shadow: 0 0 1em white, 0 0 0.5em white, 0 0 1.5em white;
+    color: green;
+}
+input[type='number'] {
+    width: 9em;
+}
+.empty {
+    text-align: center;
+    font-size: 1.5em;
+    text-shadow: 0 0 1em white, 0 0 0.5em white, 0 0 1.5em white;
+    color: green;
+    margin: 30px;
+}
+.buy {
+    text-align: center;
+    display: none;
+}
+#checkout {
+    display:none;
+}
