@@ -1,5 +1,5 @@
 body {
-    background: url('bg.jpg') no-repeat fixed center;
+    background: url('../img/bg.jpg') no-repeat fixed center;
     background-size: cover;
     font-family: 'Lobster', cursive;
 }

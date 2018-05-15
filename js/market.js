@@ -72,7 +72,7 @@ for(let i = 0; i < shop.length; i++) {
         const inputAdd = document.createElement('input');
         inputWeight.setAttribute("type", "number");
         inputWeight.setAttribute("placeholder", "Input weight in kg");
-        inputWeight.setAttribute("min", "0");
+        inputWeight.setAttribute("min", "1");
         inputAdd.setAttribute("type", "button");
         inputAdd.setAttribute("value", "Add");
         inputAdd.addEventListener('click',function(){
@@ -92,6 +92,7 @@ for(let i = 0; i < shop.length; i++) {
         const inputAdd = document.createElement('input');
         inputWeight.setAttribute("type", "number");
         inputWeight.setAttribute("placeholder", "Input weight in kg");
+        inputWeight.setAttribute("min", "1");
         inputAdd.setAttribute("type", "button");
         inputAdd.setAttribute("value", "Add");
         inputAdd.addEventListener('click',function(){
