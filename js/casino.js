@@ -1,21 +1,21 @@
 class Casino {
-    constructor (smQty, money) {
-        this.smQty = smQty;
+    constructor (slotMachineQuantity, money) {
+        this.slotMachineQuantity = slotMachineQuantity;
         this.money = money;
-        this.sm = [];
+        this.slotMachine = [];
     }
 
-    newSM(){
-        let rand = 0 - 0.5 + Math.random() * (this.smQty + 1);
+    newSlotMachine(){
+        let rand = 0 - 0.5 + Math.random() * (this.slotMachineQuantity + 1);
         rand = Math.round(rand);
-        for(let i = 0; i < this.smQty; i++) {
-            this.sm.push(new SlotMachine(this.money/this.smQty));
-            this.sm[i]['number'] = i + 1;
+        for(let i = 0; i < this.slotMachineQuantity; i++) {
+            this.slotMachine.push(new SlotMachine(this.money/this.slotMachineQuantity));
+            this.slotMachine[i]['number'] = i + 1;
             if (i === rand) {
-                this.sm[i]['isLucky'] = true;
+                this.slotMachine[i]['isLucky'] = true;
             }
         }
-        console.log('You have just created ' + this.smQty + ' SlotMachine(s).');
+        console.log('You have just created ' + this.slotMachineQuantity + ' SlotMachine(s).');
     }
 
     getMoney() {
@@ -23,36 +23,36 @@ class Casino {
         return this.money;
     }
 
-    getSmQty() {
-        console.log('Your casino have ' + (this.sm.length)  + ' SlotMachine(s).');
-        return this.sm.length;
+    getSlotMachineQuantity() {
+        console.log('Your casino have ' + (this.slotMachine.length)  + ' SlotMachine(s).');
+        return this.slotMachine.length;
     }
 
     add() {
         let max = 0;
         let maxi = 0;
-        for(let i = 0; i < this.sm.length; i++) {
-            if (this.sm[i]['money'] > max) {
-                max = this.sm[i]['money'];
+        for(let i = 0; i < this.slotMachine.length; i++) {
+            if (this.slotMachine[i]['money'] > max) {
+                max = this.slotMachine[i]['money'];
                 maxi = i;
             }
         }
-        this.sm[maxi]['money'] = this.sm[maxi]['money'] - this.sm[maxi]['money']/2;
-        this.sm.push(new SlotMachine(max/2));
-        this.sm[this.sm.length-1]['number'] = this.sm.length;
-        console.log('You have just created new SlotMachine and put ' + this.sm[maxi]['money'] + ' $ from SlotMachine ' + (maxi+1));
+        this.slotMachine[maxi]['money'] = this.slotMachine[maxi]['money'] - this.slotMachine[maxi]['money']/2;
+        this.slotMachine.push(new SlotMachine(max/2));
+        this.slotMachine[this.slotMachine.length-1]['number'] = this.slotMachine.length;
+        console.log('You have just created new SlotMachine and put ' + this.slotMachine[maxi]['money'] + ' $ from SlotMachine ' + (maxi+1));
     }
 
     del(number) {
-        if (this.sm.length <= 0) {
+        if (this.slotMachine.length <= 0) {
             console.log('You do not have SlotMachines.');
-        } else if ((number > this.sm.length) || (number < 0)) {
+        } else if ((number > this.slotMachine.length) || (number < 0)) {
             console.log('You do not have SlotMachine ' + number);
         } else {
-            let money = this.sm[number-1]['money'] / (this.sm.length - 1);
-            this.sm.splice(number-1,1);
-            for(let i = 0; i < this.sm.length; i++) {
-                this.sm[i].money = this.sm[i].money + money;
+            let money = this.slotMachine[number-1]['money'] / (this.slotMachine.length - 1);
+            this.slotMachine.splice(number-1,1);
+            for(let i = 0; i < this.slotMachine.length; i++) {
+                this.slotMachine[i].money = this.slotMachine[i].money + money;
             }
             console.log('You have just deleted SlotMachine ' + number);
         }
@@ -60,18 +60,18 @@ class Casino {
 
     getMoneyBack(amount) {
         let initialAmount = amount;
-        function compare(smA, smB) {
-            return smB.money - smA.money;
+        function compare(slotMachineA, slotMachineB) {
+            return slotMachineB.money - slotMachineA.money;
         }
-        this.sm.sort(compare);
-        for(let i = 0; i < this.sm.length; i++) {
-            if (this.sm[i].money > amount) {
-                this.sm[i].money = this.sm[i].money - amount;
+        this.slotMachine.sort(compare);
+        for(let i = 0; i < this.slotMachine.length; i++) {
+            if (this.slotMachine[i].money > amount) {
+                this.slotMachine[i].money = this.slotMachine[i].money - amount;
                 console.log('You get back ' + initialAmount + ' $.');
                 return initialAmount;
-            } else if (this.sm[i].money < amount) {
-                let x = this.sm[i].money;
-                this.sm[i].money = this.sm[i].money - x;
+            } else if (this.slotMachine[i].money < amount) {
+                let x = this.slotMachine[i].money;
+                this.slotMachine[i].money = this.slotMachine[i].money - x;
                 amount = amount - x;
             }
         }
@@ -90,7 +90,7 @@ class SlotMachine {
         return this.money;
     }
 
-    getMoneySM(amount) {
+    getMoneySlotMachine(amount) {
         if (this.money >= amount) {
             this.money = this.money - amount;
             console.log('You get ' + amount + ' $.');
@@ -100,7 +100,7 @@ class SlotMachine {
         }
     }
 
-    addMoneySM(amount) {
+    addMoneySlotMachine(amount) {
         this.money = this.money + amount;
         casino.money = casino.money + amount;
         console.log('You have just add ' + amount + ' $.');
@@ -144,21 +144,17 @@ class SlotMachine {
 }
 
 const casino = new Casino(10,1000);
-casino.newSM();
+casino.newSlotMachine();
 casino.add();
 casino.getMoney();
-casino.getSmQty();
+casino.getSlotMachineQuantity();
 casino.del(3);
 casino.getMoneyBack(11);
-casino.sm[1].getCurrentMoney();
-casino.sm[1].getMoneySM(1);
-casino.sm[1].getCurrentMoney();
+casino.slotMachine[1].getCurrentMoney();
+casino.slotMachine[1].getMoneySlotMachine(1);
+casino.slotMachine[1].getCurrentMoney();
 casino.getMoney();
-casino.sm[1].addMoneySM(1);
-casino.sm[1].getCurrentMoney();
+casino.slotMachine[1].addMoneySlotMachine(1);
+casino.slotMachine[1].getCurrentMoney();
 casino.getMoney();
-casino.sm[1].play(10);
-
-module.exports = {
-    test:test
-};
+casino.slotMachine[1].play(10);

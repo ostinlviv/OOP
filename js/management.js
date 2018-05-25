@@ -1,4 +1,4 @@
-class User {
+class SuperUser {
     constructor (name, sex, birth, address, phone, email) {
         this.name = name;
         this.sex = sex;
@@ -17,16 +17,54 @@ class User {
     }
 }
 
-class SuperUser extends User {
+class User extends SuperUser {
     constructor (name, sex, birth, address, phone, email) {
-        super();
-        this.name = name;
-        this.sex = sex;
-        this.birth = birth;
-        this.address = address;
-        this.phone = phone;
-        this.email = email;
+        super(name, sex, birth, address, phone, email);
         this.isDataVisible = false;
+    }
+
+    render() {
+        const save = document.getElementById("users");
+        let rowsNum = save.rows.length;
+        if (rowsNum > 0){
+            for(let i = 1; i < rowsNum; i++){
+                save.deleteRow(1);
+            }
+        }
+        for (let i = 0; i < db.length; i++){
+            const tr = document.createElement('tr');
+            tr.classList.add("userTr");
+            tr.setAttribute("id", i);
+            const tdName = document.createElement('td');
+            const tdSex = document.createElement('td');
+            const tdBirth = document.createElement('td');
+            const tdAddress = document.createElement('td');
+            const tdPhone = document.createElement('td');
+            const tdEmail = document.createElement('td');
+            tdName.innerHTML = db[i]['name'];
+            tdSex.innerHTML = db[i]['sex'];
+            tdBirth.innerHTML = db[i]['birth'];
+            tdAddress.innerHTML = db[i]['address'];
+            tdPhone.innerHTML = db[i]['phone'];
+            tdEmail.innerHTML = db[i]['email'];
+            if (db[i]['isDataVisible'] === true){
+                tr.appendChild(tdName);
+                tr.appendChild(tdSex);
+                tr.appendChild(tdBirth);
+                tr.appendChild(tdAddress);
+                tr.appendChild(tdPhone);
+                tr.appendChild(tdEmail);
+            } else if (db[i]['isDataVisible'] === false){
+                tr.appendChild(tdName);
+            }
+
+            save.appendChild(tr);
+
+            tr.addEventListener('click', () => {
+                db[i].changeDataVisibility();
+                this.render();
+            });
+        }
     }
 }
 
@@ -48,60 +86,17 @@ saveBtn.addEventListener('click', function() {
         if (getType === "User") {
             const user = new User(getName, getSex, getBirth, getAddress, getPhone, getEmail);
             db.push(user);
+            user.render();
         } else if (getType === "SuperUser") {
             const superUser = new SuperUser (getName, getSex, getBirth, getAddress, getPhone, getEmail);
             db.push(superUser);
+            superUser.render();
         }
-        render();
+
     }
-
-
 });
 
-function render() {
-    const save = document.getElementById("users");
-    let rowsNum = save.rows.length;
-    if (rowsNum > 0){
-        for(let i = 1; i < rowsNum; i++){
-            save.deleteRow(1);
-        }
-    }
-    for (let i = 0; i < db.length; i++){
-        const tr = document.createElement('tr');
-        tr.classList.add("userTr");
-        tr.setAttribute("id", i);
 
-        const tdName = document.createElement('td');
-        const tdSex = document.createElement('td');
-        const tdBirth = document.createElement('td');
-        const tdAddress = document.createElement('td');
-        const tdPhone = document.createElement('td');
-        const tdEmail = document.createElement('td');
-        tdName.innerHTML = db[i]['name'];
-        tdSex.innerHTML = db[i]['sex'];
-        tdBirth.innerHTML = db[i]['birth'];
-        tdAddress.innerHTML = db[i]['address'];
-        tdPhone.innerHTML = db[i]['phone'];
-        tdEmail.innerHTML = db[i]['email'];
-        if (db[i]['isDataVisible'] === true){
-            tr.appendChild(tdName);
-            tr.appendChild(tdSex);
-            tr.appendChild(tdBirth);
-            tr.appendChild(tdAddress);
-            tr.appendChild(tdPhone);
-            tr.appendChild(tdEmail);
-        } else if (db[i]['isDataVisible'] === false){
-            tr.appendChild(tdName);
-        }
-
-        save.appendChild(tr);
-
-        tr.addEventListener('click', function() {
-                db[i].changeDataVisibility();
-                render();
-        });
-    }
-}
 
 
 
